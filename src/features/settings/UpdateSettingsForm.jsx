@@ -1,12 +1,15 @@
-import Spinner from 'ui/Spinner';
-import { useSettings } from 'features/settings/useSettings';
-import { useUpdateSetting } from 'features/settings/useUpdateSetting';
+/* eslint-disable no-unused-vars */
+import Spinner from '../../ui/Spinner';
+// import { useSettings } from 'features/settings/useSettings';
+import { useUpdateSetting } from './useUpdateSetting';
 
-import Form from 'ui/Form';
-import FormRow from 'ui/FormRow';
-import Input from 'ui/Input';
+import Form from '../../ui/Form';
+import FormRow from '../../ui/FormRow';
+import Input from '../../ui/Input';
+import { useSettings } from './useSettings';
 
 function UpdateSettingsForm() {
+  const { isLoading, settings } = useSettings()
   const {
     settings: {
       minBookingLength,
@@ -14,9 +17,10 @@ function UpdateSettingsForm() {
       maxGuestsPerBooking,
       breakfastPrice,
     } = {},
-    isLoading,
+  //   isLoading,
   } = useSettings();
-  const { mutate: updateSetting, isLoading: isUpdating } = useUpdateSetting();
+  // const { mutate: updateSetting, isLoading: isUpdating } = useUpdateSetting();
+  const { updateSetting, isUpdating } = useUpdateSetting();
 
   // return <Spinner />;
   if (isLoading) return <Spinner />;
@@ -30,6 +34,7 @@ function UpdateSettingsForm() {
 
   // This time we are using UNCONTROLLED fields, so we will NOT store state
   return (
+
     <Form>
       <FormRow label='Minimum nights/booking'>
         <Input
@@ -68,7 +73,7 @@ function UpdateSettingsForm() {
         />
       </FormRow>
     </Form>
-  );
+  )
 }
 
 export default UpdateSettingsForm;
